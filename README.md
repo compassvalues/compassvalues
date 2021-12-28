@@ -1,1 +1,1 @@
-SapplyValues is a clone of the Sapply political compass, made to use 8values' UI.
+A modified version of SapplyValues that only has the two axes, becauase the conservative-progressive one sucks.
