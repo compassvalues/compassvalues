@@ -1,17 +1,6 @@
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-99715444-7"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-99715444-7');
-    </script>
-
     <meta charset="utf-8">
-    <title>SapplyValues Feedback</title>
-
+    <title>CompassValues Quiz</title>
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,700" rel="stylesheet">
     <link href='style.css' rel='stylesheet' type='text/css'>
@@ -21,32 +10,28 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-
-
-	<h1 class="title">SapplyValues</h1>
-    <svg id="svgHeader" style="width: 100%;" viewBox="0 0 112 19">
-		<text x="50%" y="15" class="svgHeader">SapplyValues</text>
+	<h1 class="title">CompassValues</h1>
+    	<svg id="svgHeader" style="width: 100%;" viewBox="0 0 112 19">
+		<text x="50%" y="15" class="svgHeader">CompassValues</text>
 	</svg>
 <hr>
 
 <h2 style="text-align:center;" id="question-number">All done!</h2>
-<p class="question" id="question-text">Did you complete this test in a serious (or at least unironic) manner?</p>
+<p class="question" id="question-text">Let's see your results!</p>
 <div id="answers">
-    <button class="button" id="serious_extra" onclick="init_question()" style="background-color: #1b5e20;">Yes, and I'd like to (anonymously) help with ideology assignment!</button> <br>
-    <button class="button" id="serious" onclick="pass(true)" style="background-color: #4caf50;">Yes, but get me to the results!</button> <br>
-    <button class="button" onclick="pass(false)">Nah, just get me to the results!</button> <br>
+    <button class="button" id="serious" onclick="pass(true)" style="background-color: #4caf50;">View my results!</button> <br>
     <button class="button" id="quiz" onclick="location.href='quiz.html';" style="background-color: #4caf50; display: none;">Do the quiz!</button> <br>
 </div>
+	
 <button class="small_button" onclick="prev_question()" id="back_button" style="display: none;">Back</button>
 <button class="small_button_off" id="back_button_off" style="display: none;">Back</button><br>
 
 <!-- Test JS -->
 <script>
-
     // Taken cookie
 
     var taken = false;
@@ -56,7 +41,6 @@
     } catch(err) {
       taken = false;
     }
-
 
     // Declare previous answers (and unlock positive answers)
 
@@ -68,13 +52,11 @@
         testPercentages = new Object();
     }
 
-
     if (jQuery.isEmptyObject(testAnswers)) {
         $('#quiz').show()
         $('#serious_extra').hide()
         $('#serious').hide()
     }
-
 
     // init variables
     var answers = new Object();     // Store user's answers
@@ -82,7 +64,6 @@
 
 
     // Populate questionsObject
-
     var questionsObject = new Object();     // Question objects with ID keys
     questions.forEach(populateQO);
 
@@ -92,18 +73,13 @@
 
     var questionsOrder = Object.keys(questionsObject);
 
-
-
-
     // Init question
-
     function init_question() {
         if (jQuery.isEmptyObject(testAnswers)) {
             location.href = `quiz.html`
         }
         current = questionsObject[questionsOrder[qn]]
-
-
+	    
         $("#question-text").html(current.question);
         $("#question-number").html("Question "+(qn + 1)+" of "+(questionsOrder.length));
 
@@ -168,7 +144,6 @@
             $("#text").focus();
         }
 
-
         if (jQuery.isEmptyObject(answers)) {
             $('#back_button').hide()
             $('#back_button_off').show()
@@ -178,9 +153,7 @@
         }
     }
 
-
     // Next question
-
     function next_question(answer) {
         if (qn === questionsOrder.length) {
             return;
@@ -196,9 +169,7 @@
         }
     }
 
-
     // Previous question
-
     function prev_question() {
         if (jQuery.isEmptyObject(answers)) {
             $('#back_button').hide()
@@ -214,7 +185,6 @@
 
 
     // Methods to manipulate answering
-
     function createButton(buttonInfo) {
         if ( buttonInfo["effect"] === null || Number.isInteger(buttonInfo["effect"]) ) {
             var btn = $(`<button class="button" onclick="next_question(${buttonInfo["effect"]})" style="background-color: ${buttonInfo["color"]};">${buttonInfo["label"]}</button> <br>`);
@@ -243,8 +213,6 @@
         var nr = $("#text").val();
         return nr;
     }
-
-
 
     function sendDataAndRefer(answers, pct, extra) {
         // Send to custom data collection server, if you want to add your test too, hit me up at SapplyValues8@gmail.com
